@@ -63,7 +63,7 @@ class _GraphState extends State<Graph> {
           SizedBox(
             height: 400,
             width: double.infinity,
-            child: chartBuilder(list: priceTime),
+            child: chartBuilder(priceTime:priceTime),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
