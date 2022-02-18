@@ -19,16 +19,3 @@ class _chartBuilderState extends State<chartBuilder> {
     return Text("Hi");
   }
 }
-
-class tickHistory {
-  final String time;
-  final double price;
-
-  tickHistory({
-    required this.time,
-    required this.price,
-  });
-
-  @override
-  String toString() => '[ $time , $price ]';
-}
