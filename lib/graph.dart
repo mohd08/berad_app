@@ -63,7 +63,56 @@ class _GraphState extends State<Graph> {
           SizedBox(
             height: 400,
             width: double.infinity,
-            child: chartBuilder(priceTime:priceTime),
+            child: SfCartesianChart(
+              margin: EdgeInsets.only(top: 20.0, left: 8.0),
+              enableAxisAnimation: true,
+              plotAreaBackgroundColor: Colors.black,
+
+              zoomPanBehavior: ZoomPanBehavior(
+                selectionRectColor: Colors.red,
+                zoomMode: ZoomMode.x,
+                enablePanning: true,
+                enableDoubleTapZooming: true,
+                enablePinching: true,
+              ),
+              primaryXAxis: CategoryAxis(
+                isVisible: true,
+                majorGridLines: MajorGridLines(width: 0),
+                labelStyle: TextStyle(color: Colors.white),
+                labelPlacement: LabelPlacement.onTicks,
+                labelPosition: ChartDataLabelPosition.inside,
+              ),
+              primaryYAxis: NumericAxis(
+                interval: 0.1,
+                majorGridLines: MajorGridLines(width: 0),
+                labelPosition: ChartDataLabelPosition.inside,
+                labelStyle: TextStyle(color: Colors.white),
+                opposedPosition: true,
+              ),
+
+              // Chart title
+
+              tooltipBehavior: TooltipBehavior(
+                tooltipPosition: TooltipPosition.auto,
+                color: Colors.red,
+                elevation: 10,
+                enable: true,
+                format: 'point.y at point.x',
+                shouldAlwaysShow: true,
+                canShowMarker: true,
+              ),
+              series: <ChartSeries<tickHistory, String>>[
+                LineSeries<tickHistory, String>(
+                  color: Colors.grey,
+                  enableTooltip: true,
+                  dataSource: priceTime,
+                  xValueMapper: (tickHistory ticks, _) => ticks.time,
+                  yValueMapper: (tickHistory ticks, _) => ticks.price,
+                  name: 'Ticks',
+                  // Enable data label
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
